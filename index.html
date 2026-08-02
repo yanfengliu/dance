@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090b10" />
+    <meta
+      name="description"
+      content="POCKET turns rhythm, groove, and microtiming into an expressive procedural dancer."
+    />
+    <title>POCKET — See the groove</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app" id="app">
+      <header class="topbar">
+        <a class="brand" href="#stage" aria-label="POCKET home">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>POCKET</span>
+        </a>
+        <p class="source-note" id="source-note">Audio stays on your device</p>
+      </header>
+
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">A MUSIC-TO-MOTION EXPERIMENT</p>
+        <h1 id="page-title">Hear the spaces.<br /><em>See the groove.</em></h1>
+        <p class="lede">
+          This dancer follows more than the beat. It listens for weight, swing, and whether the music
+          leans ahead or settles behind.
+        </p>
+      </section>
+
+      <section class="stage-shell" id="stage" aria-label="Music-reactive dance stage">
+        <div class="stage-toolbar">
+          <div class="live-indicator" id="live-indicator" data-active="false">
+            <span aria-hidden="true"></span>
+            <span id="live-label">READY</span>
+          </div>
+          <button class="motion-toggle" id="motion-toggle" type="button" aria-pressed="false">
+            Reduce motion
+          </button>
+        </div>
+
+        <p class="error-banner" id="error-banner" role="alert" hidden></p>
+
+        <canvas
+          id="dance-canvas"
+          role="img"
+          aria-label="An abstract jointed dancer whose feet follow the beat, hips follow the bass, shoulders follow the backbeat, and hands follow high-frequency accents."
+        ></canvas>
+
+        <div class="drop-prompt" id="drop-prompt" aria-hidden="true">
+          <span>Drop audio to enter the pocket</span>
+        </div>
+
+        <div class="first-run" id="first-run">
+          <p>Drop in. Find the pocket.</p>
+          <span>Try the built-in groove or choose audio from your device.</span>
+        </div>
+
+        <div class="readouts" aria-label="Live groove analysis">
+          <div class="readout">
+            <span class="readout-label">TEMPO</span>
+            <strong id="tempo-value">—</strong>
+            <span class="readout-unit">BPM</span>
+          </div>
+          <div class="readout readout-pocket">
+            <span class="readout-label">POCKET</span>
+            <strong id="pocket-value">listening</strong>
+            <span class="readout-detail" id="pocket-detail">waiting for a pattern</span>
+            <div class="pocket-rail" aria-hidden="true">
+              <span>AHEAD</span><i><b id="pocket-dot"></b></i><span>BEHIND</span>
+            </div>
+          </div>
+          <div class="readout">
+            <span class="readout-label">LOCK</span>
+            <strong id="lock-value">0</strong>
+            <span class="readout-unit">%</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="transport" aria-label="Audio controls">
+        <div class="transport-actions">
+          <button class="button button-primary" id="demo-button" type="button">
+            <span class="button-icon" aria-hidden="true">▶</span>
+            <span>Play demo groove</span>
+          </button>
+          <label class="button button-secondary" for="audio-file">
+            <span class="button-icon" aria-hidden="true">＋</span>
+            <span>Choose audio</span>
+            <input id="audio-file" type="file" accept="audio/*,.mp3,.wav,.m4a,.aac,.ogg" />
+          </label>
+          <button class="play-toggle" id="play-toggle" type="button" aria-label="Play" disabled>
+            <span id="play-icon" aria-hidden="true">▶</span>
+          </button>
+        </div>
+
+        <div class="track-info">
+          <div class="track-copy">
+            <strong id="track-title">No track loaded</strong>
+            <span id="time-value">0:00 / 0:00</span>
+          </div>
+          <label class="sr-only" for="seek">Track position</label>
+          <input id="seek" class="seek" type="range" min="0" max="1000" value="0" disabled />
+        </div>
+      </section>
+
+      <p class="status sr-only" id="status" role="status" aria-live="polite">Ready</p>
+      <audio id="audio" preload="metadata"></audio>
+
+      <footer>
+        <p>Local audio only. Nothing is uploaded.</p>
+        <p>Best with rhythm-forward MP3, WAV, M4A, or OGG files.</p>
+      </footer>
+    </main>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
